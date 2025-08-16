@@ -6,7 +6,7 @@ import os
 from prompt_list import *
 from rank_bm25 import BM25Okapi
 from sentence_transformers import util
-from openai import OpenAI
+from together import Together
 
 def retrieve_top_docs(query, docs, model, width=3):
     query_emb = model.encode(query)
@@ -54,19 +54,11 @@ def clean_relations_bm25_sent(topn_relations, topn_scores, entity_id, head_relat
 def run_llm(prompt, temperature, max_tokens, opeani_api_keys, engine="gpt-3.5-turbo", n=1):
 
     if "llama" in engine.lower():
-        openai_api_key = "EMPTY"
-        openai_api_base = "http://localhost:7788/v1"
-
-        client = OpenAI(
-            api_key=openai_api_key,
-            base_url=openai_api_base,
-        )
-
-        models = client.models.list()
-        engine = models.data[0].id
-        print(engine)
+        if engine.lower() == "llama":
+            engine = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        client = Together(api_key=opeani_api_keys)
     else:
-        client = openai.OpenAI(api_key=opeani_api_keys, base_url="<your_api_url>")
+        client = openai.OpenAI(api_key=opeani_api_keys, base_url="")
 
 
     sys_prompt = '''You are a helpful assistant'''
@@ -102,17 +94,9 @@ def run_llm(prompt, temperature, max_tokens, opeani_api_keys, engine="gpt-3.5-tu
 def run_llm_cnfin(prompt, temperature, max_tokens, opeani_api_keys, engine="gpt-3.5-turbo", n=1):
 
     if "llama" in engine.lower():
-        openai_api_key = "EMPTY"
-        openai_api_base = "http://localhost:7788/v1"
-
-        client = OpenAI(
-            api_key=openai_api_key,
-            base_url=openai_api_base,
-        )
-
-        models = client.models.list()
-        engine = models.data[0].id
-        print(engine)
+        if engine.lower() == "llama":
+            engine = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        client = Together(api_key=opeani_api_keys)
     else:
         client = openai.OpenAI(api_key=opeani_api_keys, base_url="https://api.gptsapi.net/v1")
 

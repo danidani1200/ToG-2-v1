@@ -45,6 +45,10 @@ python main_tog2.py \
 --self_consistency_threshold 0.8 \  # self-consistency threshold, 0.8 is the default setting.
 --clue_query True \  # whether use clue query.
 ```
+
+### Using Together's Llama models
+To run ToG-2 with a Llama model hosted on [Together](https://www.together.ai/), install the `together` package and supply your Together API key via `--opeani_api_keys`. Setting `--LLM_type llama` will use the `meta-llama/Meta-Llama-3.1-8B-Instruct` model by default.
+
 ### Example: Our experimental script for HotpotQA.
 ```
 cd ToG-2
