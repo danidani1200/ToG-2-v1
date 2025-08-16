@@ -1,7 +1,7 @@
 import time,openai,json,random,heapq,math
 from utils import *
 from search import *
-from openai import OpenAI
+from together import Together
 
 def transform_relation(wiki_relation):
     relation_without_prefix = wiki_relation.replace("wiki.relation.", "").replace("_", " ")
@@ -290,17 +290,9 @@ def relation_search(entity_id, entity_name, pre_relations, pre_head, question, a
 
 def run_llm_json(prompt, temperature, max_tokens, openai_api_keys, args, engine="gpt-3.5-turbo"):
     if "llama" in engine.lower():
-        openai_api_key = "EMPTY"
-        openai_api_base = "http://localhost:7788/v1"
-
-        client = OpenAI(
-            api_key=openai_api_key,
-            base_url=openai_api_base,
-        )
-
-        models = client.models.list()
-        engine = models.data[0].id
-        print(engine)
+        if engine.lower() == "llama":
+            engine = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        client = Together(api_key=openai_api_keys)
         res_format = {"type": "text"}
     else:
         client = openai.OpenAI(api_key=openai_api_keys, base_url="")

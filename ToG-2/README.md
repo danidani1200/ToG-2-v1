@@ -13,9 +13,11 @@ python main_tog2.py \
 --LLM_type gpt-3.5-turbo \  # the LLM you choose for other generations.
 --opeani_api_keys <api_key> \  # your own api key, if LLM_type is local LLMs, this parameter would be rendered ineffective.
 --embedding_model_name <search_model_name> \  # model name for text search. "bge-bi" (bge embedding), "bge-ce" (bge reranker),"bm25","minilm" (ms-marco-MiniLM-L-6-v2) and "colbert" (bge-m3).
---relation_prune_combination True\  # whether perform relation_prune_combination. 
+--relation_prune_combination True\  # whether perform relation_prune_combination.
 --num_sents_for_reasoning 10 \  # number of sentences retained for reasoning. 10 is the default setting.
 --topic_prune True \  # whether perform topic prune.
 --self_consistency_threshold 0.8 \  # self-consistency threshold, 0.8 is the default setting.
 --clue_query \  # whether use clue query.
 ```
+
+Setting `--LLM_type llama` will call the `meta-llama/Meta-Llama-3.1-8B-Instruct` model via the Together API. Provide your Together API key with `--opeani_api_keys`.
