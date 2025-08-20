@@ -1,2 +1,3 @@
-http://xx.xx.xx.xx:xx   # Include your own Wikidata server urls here.
-
+https://query.wikidata.org/sparql
+https://www.wikidata.org/w/api.php
+https://www.wikidata.org/wiki/Special:EntityData/
